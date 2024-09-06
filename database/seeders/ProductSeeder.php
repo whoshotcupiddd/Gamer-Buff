@@ -2,26 +2,13 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Product;
 use Illuminate\Database\Seeder;
+use App\Models\Product;
 
-class DatabaseSeeder extends Seeder
+class ProductSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
-    public function run(): void
+    public function run()
     {
-
-        //super admin
-        \App\Models\User::create([
-            'name' => 'Super Admin',
-            'email' => 'joe@admin.com',
-            'password' => bcrypt('123'),
-            'role' => 1,
-        ]);
-
         Product::create([
             'name' => 'Black Myth: Wukong',
             'price' => 59.99,
@@ -42,6 +29,5 @@ class DatabaseSeeder extends Seeder
             'image' => 'valorant.jpg',
             'description' => 'A tactical shooter from Riot Games that is free to play.'
         ]);
-
     }
 }
