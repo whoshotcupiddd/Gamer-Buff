@@ -11,13 +11,13 @@ class ProductController extends Controller
     public function showProductsPage()
     {
         $products = Product::all();
-        return view('products', compact('products'));
+        return view('frontend.products', compact('products'));
     }
 
     // Show individual product details
     public function showProductDetails($id)
     {
         $product = Product::findOrFail($id);
-        return view('product-details', compact('product'));
+        return view('frontend.product-details', compact('product'));
     }
 }

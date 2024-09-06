@@ -11,7 +11,7 @@ class CartController extends Controller
     public function showCart()
     {
         $cart = session()->get('cart', []);
-        return view('cart', compact('cart'));
+        return view('frontend.cart', compact('cart'));
     }
 
     // Add product to the cart

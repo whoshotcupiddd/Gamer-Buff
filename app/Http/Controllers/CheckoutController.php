@@ -16,7 +16,7 @@ class CheckoutController extends Controller
             return $item['price'] * $item['quantity'];
         }, $cart));
 
-        return view('checkout', compact('total'));
+        return view('frontend.checkout', compact('total'));
     }
 
     // Process the payment

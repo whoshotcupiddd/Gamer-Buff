@@ -249,9 +249,21 @@
         <input type="text" placeholder="Search...">
     </div>
     <div class="login-register">
-        <a href="{{ route('user.login') }}"><button>Login</button></a>
-        <a href="{{ route('user.create') }}"><button>Register</button></a>
+        @if(Auth::check())
+            <span>Welcome, {{ Auth::user()->name }}!</span>
+            <a href="{{ route('user.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <button>Logout</button>
+            </a>
+
+            <form id="logout-form" action="{{ route('user.logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+        @else
+            <a href="{{ route('user.login') }}"><button>Login</button></a>
+            <a href="{{ route('user.register') }}"><button>Register</button></a>
+        @endif
     </div>
+
 </div>
 <div id="mySidenav" class="vertical-nav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
