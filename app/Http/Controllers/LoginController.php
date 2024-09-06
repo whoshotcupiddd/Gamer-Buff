@@ -15,7 +15,7 @@ class LoginController extends Controller
         return view('users.login');
     }
 
-    public function login(Request $request): \Illuminate\Http\RedirectResponse
+    public function login(Request $request)
     {
         $request->validate([
             'email' => 'required|email',
@@ -27,19 +27,19 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            Alert::success('Success', 'Logged in successfully');
-
-            if(Auth::user()->role == 1 || Auth::user()->role == 2){
-                return redirect()->intended('admin/dashboard');
-            }
-            else if (Auth::user()->role == 3){
-                return redirect()->intended('products');
-            }
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Logged in successfully!',
+                'redirect' => Auth::user()->role == 1 || Auth::user()->role == 2
+                    ? route('admin.dashboard')
+                    : route('products')
+            ]);
         }
 
-        Alert::error('Error', 'The provided credentials do not match our records.');
-
-        return back();
+        return response()->json([
+            'status' => 'error',
+            'message' => 'The provided credentials do not match our records.'
+        ], 400);
     }
 
     public function logout(): \Illuminate\Http\RedirectResponse
